@@ -110,3 +110,5 @@ export const AboutContent = {
 export const HeaderContent = {
   title: "🚀 Know Your Positivity! Unlock Your Power! 🪄",
 };
+
+export const ThanksNote = "Thank you for being with us!";
