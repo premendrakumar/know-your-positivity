@@ -1,28 +1,35 @@
-import CardData, { AboutContent, HeaderContent } from "../data.js";
+import LanguageData from "../languageConfig.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  let currentIndex = 0;
-  const keys = Array.from(CardData.keys());
+  let lang = localStorage.getItem("appLanguage") || "en";
+  let { CardData, AboutContent, HeaderContent, ThanksNote } = LanguageData[lang];
 
-  const updateCard = () => {
-    const { title, desc } = CardData.get(keys[currentIndex]);
-    document.getElementById("title").innerHTML = title;
-    document.getElementById("desc").innerHTML = desc;
-  };
+  const updateLanguage = () => {
+    ({ CardData, AboutContent, HeaderContent, ThanksNote } = LanguageData[lang]);
 
-  document.getElementById("prev").addEventListener("click", () => {
-    currentIndex = (currentIndex - 1 + keys.length) % keys.length;
-    updateCard();
-  });
+    // 🔹 Update Card Content
+    let currentIndex = 0;
+    const keys = Array.from(CardData.keys());
 
-  document.getElementById("next").addEventListener("click", () => {
-    currentIndex = (currentIndex + 1) % keys.length;
-    updateCard();
-  });
+    const updateCard = () => {
+      const { title, desc } = CardData.get(keys[currentIndex]);
+      document.getElementById("title").innerHTML = title;
+      document.getElementById("desc").innerHTML = desc;
+    };
 
-  updateCard(); // Initial card load
+    document.getElementById("prev").addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + keys.length) % keys.length;
+      updateCard();
+    });
 
-  // 🔅 Theme Toggle
+    document.getElementById("next").addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % keys.length;
+      updateCard();
+    });
+
+    updateCard(); // Initial card load
+
+    // 🔅 Theme Toggle
   const themeToggle = document.getElementById("toggle-theme");
   const html = document.documentElement;
 
@@ -40,41 +47,36 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   });
 
-  // 🔥 About Modal Handling
-  const aboutModal = document.getElementById("about-modal");
-  const aboutBtn = document.getElementById("about-btn");
-  const closeModal = document.getElementById("close-modal");
+    // 🔹 Update Header
+    document.getElementById("kyp-header").innerHTML = HeaderContent.title;
 
-  // const aboutContent = {
-  //   title: "About Know Your Positivity",
-  //   description: "This tool helps you unlock your inner power through motivational quotes! 🚀",
-  //   why: "Because sometimes, all we need is a little push to see the brighter side of life! 🌟",
-  // };
+    // 🔹 Update About Modal
+    document.getElementById("about-btn").addEventListener("click", () => {
+      const aboutModal = document.getElementById("about-modal");
+      aboutModal.querySelector("h2").textContent = AboutContent.title;
+      aboutModal.querySelector("p").innerHTML = `
+        <strong>What:</strong> ${AboutContent.description}<br><br>
+        <strong>Why:</strong> ${AboutContent.why}<br><br>
+        <span style="font-size: 0.7rem; color: gray;">Version: ${AboutContent.version}</span>
+      `;
+      aboutModal.classList.remove("opacity-0", "pointer-events-none");
+    });
 
-  aboutBtn.addEventListener("click", () => {
-    aboutModal.querySelector("h2").textContent = AboutContent.title;
-    aboutModal.querySelector(
-      "p"
-    ).innerHTML = `<strong>What:</strong> ${AboutContent.description}<br><br>
-       <strong>Why:</strong> ${AboutContent.why}<br><br>
-       <span style="font-size: 0.7rem; color: gray;">Version: ${AboutContent.version}</span>`;
+    document.getElementById("close-modal").innerHTML = AboutContent.closeButtonTitle;
 
-    aboutModal.classList.remove("opacity-0", "pointer-events-none");
+    // 🔹 Update Thank You Note
+    document.getElementById("thanksNote").innerText = ThanksNote;
+
+    // 🔹 Update Language Switcher Button
+    document.getElementById("langSwitch").innerText = lang === "en" ? "🇮🇳 हिंदी" : "🇬🇧 English";
+  };
+
+  // 🔄 Language Switcher Event
+  document.getElementById("langSwitch").addEventListener("click", () => {
+    lang = lang === "en" ? "hi" : "en";
+    localStorage.setItem("appLanguage", lang);
+    updateLanguage();
   });
 
-  closeModal.addEventListener("click", () => {
-    aboutModal.classList.add("opacity-0", "pointer-events-none");
-  });
-
-  closeModal.innerHTML = AboutContent.closeButtonTitle;
-
-  // 🔒 Security: Disable Right Click & Inspect Element
-  document.addEventListener("contextmenu", (event) => event.preventDefault());
-  document.addEventListener("keydown", (event) => {
-    if (event.ctrlKey && ["u", "U", "I", "J"].includes(event.key)) {
-      event.preventDefault();
-    }
-  });
-
-  document.getElementById("kyp-header").innerHTML = HeaderContent.title;
+  updateLanguage();
 });

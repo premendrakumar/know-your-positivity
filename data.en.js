@@ -1,4 +1,4 @@
-const CardData = new Map([
+export const CardData = new Map([
   [
     "1",
     {
@@ -94,7 +94,7 @@ const CardData = new Map([
   ],
 ]);
 
-export default CardData;
+// export default CardData;
 
 export const AboutContent = {
   title: "About Know Your Positivity",
