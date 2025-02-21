@@ -6,8 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const updateCard = () => {
     const { title, desc } = data.get(keys[currentIndex]);
-    // document.getElementById("title").textContent = title;
-    // document.getElementById("desc").textContent = desc;
     document.getElementById("title").innerHTML = title;
     document.getElementById("desc").innerHTML = desc;
   };
@@ -22,9 +20,9 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCard();
   });
 
-  updateCard();
+  updateCard(); // Initial card load
 
-  // Theme Toggle
+  // 🔅 Theme Toggle
   const themeToggle = document.getElementById("toggle-theme");
   const html = document.documentElement;
 
@@ -34,25 +32,35 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   themeToggle.addEventListener("click", () => {
-    html.classList.toggle("dark");
-    const isDark = html.classList.contains("dark");
+    const isDark = html.classList.toggle("dark");
     themeToggle.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
     localStorage.setItem("know-your-potential-theme", isDark ? "dark" : "light");
   });
 
-  // About Modal
-  // const aboutBtn = document.getElementById("about-btn");
-  // const closeModal = document.getElementById("close-modal");
-  // const aboutModal = document.getElementById("about-modal");
-
-  // aboutBtn.addEventListener("click", () => aboutModal.classList.remove("hidden"));
-  // closeModal.addEventListener("click", () => aboutModal.classList.add("hidden"));
-
+  // 🔥 About Modal Handling
   const aboutModal = document.getElementById("about-modal");
   const aboutBtn = document.getElementById("about-btn");
   const closeModal = document.getElementById("close-modal");
 
+  // const aboutContent = {
+  //   title: "About Know Your Positivity",
+  //   description: "This tool helps you unlock your inner power through motivational quotes! 🚀",
+  //   why: "Because sometimes, all we need is a little push to see the brighter side of life! 🌟",
+  // };
+
+  const aboutContent = {
+    title: "About Know Your Positivity",
+    description: "This tool helps you unlock your inner power through motivational quotes! 🚀",
+    why: `Because sometimes, all we need is a little push to see the brighter side of life! 🌟<br><br>
+          <strong>Why Me?</strong> Because I believe in continuous self-improvement and 
+          spreading positivity! Every day is a new chance to grow and inspire others. 🚀🔥`,
+  };
+
   aboutBtn.addEventListener("click", () => {
+    aboutModal.querySelector("h2").textContent = aboutContent.title;
+    aboutModal.querySelector("p").innerHTML = 
+      `<strong>What:</strong> ${aboutContent.description}<br><br>
+       <strong>Why:</strong> ${aboutContent.why}`;
     aboutModal.classList.remove("opacity-0", "pointer-events-none");
   });
 
@@ -60,9 +68,11 @@ document.addEventListener("DOMContentLoaded", () => {
     aboutModal.classList.add("opacity-0", "pointer-events-none");
   });
 
-  // Security: Disable Right Click & Inspect Element
+  // 🔒 Security: Disable Right Click & Inspect Element
   document.addEventListener("contextmenu", (event) => event.preventDefault());
   document.addEventListener("keydown", (event) => {
-    if (event.ctrlKey && ["u", "U", "I", "J", "C"].includes(event.key)) event.preventDefault();
+    if (event.ctrlKey && ["u", "U", "I", "J"].includes(event.key)) {
+      event.preventDefault();
+    }
   });
 });
