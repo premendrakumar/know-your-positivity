@@ -37,7 +37,10 @@ document.addEventListener("DOMContentLoaded", () => {
     html.classList.toggle("dark");
     const isDark = html.classList.contains("dark");
     themeToggle.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
-    localStorage.setItem("know-your-potential-theme", isDark ? "dark" : "light");
+    localStorage.setItem(
+      "know-your-potential-theme",
+      isDark ? "dark" : "light"
+    );
   });
 
   // About Modal
@@ -52,7 +55,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const aboutBtn = document.getElementById("about-btn");
   const closeModal = document.getElementById("close-modal");
 
+  // WHY content stored separately for easy updates
+  const aboutContent = {
+    title: "About Know Your Positivity",
+    description:
+      "This tool helps you unlock your inner power through motivational quotes! 🚀",
+    why: "Because sometimes, all we need is a little push to see the brighter side of life! 🌟",
+  };
+
   aboutBtn.addEventListener("click", () => {
+    aboutModal.classList.remove("opacity-0", "pointer-events-none");
+    aboutModal.querySelector("h2").textContent = aboutContent.title;
+    aboutModal.querySelector(
+      "p"
+    ).innerHTML = `<strong>What:</strong> ${aboutContent.description}<br><br>
+             <strong>Why:</strong> ${aboutContent.why}`;
     aboutModal.classList.remove("opacity-0", "pointer-events-none");
   });
 
@@ -63,6 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Security: Disable Right Click & Inspect Element
   document.addEventListener("contextmenu", (event) => event.preventDefault());
   document.addEventListener("keydown", (event) => {
-    if (event.ctrlKey && ["u", "U", "I", "J", "C"].includes(event.key)) event.preventDefault();
+    if (event.ctrlKey && ["u", "U", "I", "J", "C"].includes(event.key))
+      event.preventDefault();
   });
 });
