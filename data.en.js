@@ -112,3 +112,5 @@ export const HeaderContent = {
 };
 
 export const ThanksNote = "Thank you for being with us!";
+
+export const LangText = "🇮🇳";

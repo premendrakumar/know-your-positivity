@@ -2,10 +2,12 @@ import LanguageData from "../languageConfig.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   let lang = localStorage.getItem("appLanguage") || "en";
-  let { CardData, AboutContent, HeaderContent, ThanksNote } = LanguageData[lang];
+  let { CardData, AboutContent, HeaderContent, ThanksNote } =
+    LanguageData[lang];
 
   const updateLanguage = () => {
-    ({ CardData, AboutContent, HeaderContent, ThanksNote } = LanguageData[lang]);
+    ({ CardData, AboutContent, HeaderContent, ThanksNote } =
+      LanguageData[lang]);
 
     // 🔹 Update Card Content
     let currentIndex = 0;
@@ -30,22 +32,22 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCard(); // Initial card load
 
     // 🔅 Theme Toggle
-  const themeToggle = document.getElementById("toggle-theme");
-  const html = document.documentElement;
+    const themeToggle = document.getElementById("toggle-theme");
+    const html = document.documentElement;
 
-  if (localStorage.getItem("know-your-potential-theme") === "dark") {
-    html.classList.add("dark");
-    themeToggle.textContent = "☀️ Light Mode";
-  }
+    if (localStorage.getItem("know-your-potential-theme") === "dark") {
+      html.classList.add("dark");
+      themeToggle.textContent = "☀️ Light Mode";
+    }
 
-  themeToggle.addEventListener("click", () => {
-    const isDark = html.classList.toggle("dark");
-    themeToggle.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
-    localStorage.setItem(
-      "know-your-potential-theme",
-      isDark ? "dark" : "light"
-    );
-  });
+    themeToggle.addEventListener("click", () => {
+      const isDark = html.classList.toggle("dark");
+      themeToggle.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+      localStorage.setItem(
+        "know-your-potential-theme",
+        isDark ? "dark" : "light"
+      );
+    });
 
     // 🔹 Update Header
     document.getElementById("kyp-header").innerHTML = HeaderContent.title;
@@ -62,13 +64,15 @@ document.addEventListener("DOMContentLoaded", () => {
       aboutModal.classList.remove("opacity-0", "pointer-events-none");
     });
 
-    document.getElementById("close-modal").innerHTML = AboutContent.closeButtonTitle;
+    document.getElementById("close-modal").innerHTML =
+      AboutContent.closeButtonTitle;
 
     // 🔹 Update Thank You Note
     document.getElementById("thanksNote").innerText = ThanksNote;
 
     // 🔹 Update Language Switcher Button
-    document.getElementById("langSwitch").innerText = lang === "en" ? "🇮🇳 हिंदी" : "🇬🇧 English";
+    document.getElementById("langSwitch").innerText =
+      lang === "en" ? "🇮🇳 हिंदी" : "🇬🇧 English";
   };
 
   // 🔄 Language Switcher Event

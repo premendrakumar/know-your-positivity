@@ -112,3 +112,5 @@ export const HeaderContent = {
 };
 
 export const ThanksNote = "हमारे साथ रहने के लिए धन्यवाद!";
+
+export const LangText = "हिंदी";
