@@ -11,7 +11,7 @@ All notable changes to this project will be documented in this file.
 - 🎯More engaging UI/UX enhancements.
 - 🎯New set of motivational quotes.
 
-## [1.0.4] - 2025-02-21
+## [1.0.4] - 2025-02-21, In-progress
 - 🎯Hindi language support.
   - 🎯Working to implement Dropdown ki jagah 'En hin' jaisa UI bhi bana sakte ho!
 - 🎯data.json ko data.en.json and data.hin.json jaisa kuch (so that we can create more i18n supported files in future)
