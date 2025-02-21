@@ -12,6 +12,11 @@ All notable changes to this project will be documented in this file.
 - New set of motivational quotes.
 
 ---
+## [v1.0.3] - 2025-02-21
+- ✅ Version displayed at the bottom
+- ✅ Font size smallest (0.7rem) & color gray
+- ✅ Preserves readability without distraction
+---
 
 ## [v1.0.2] - 2025-02-21
 ### ✅ Enhancements:
