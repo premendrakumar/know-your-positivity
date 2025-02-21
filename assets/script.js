@@ -1,83 +1,86 @@
-import data from "../data.js";
+import LanguageData from "../languageConfig.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  let currentIndex = 0;
-  const keys = Array.from(data.keys());
+  let lang = localStorage.getItem("appLanguage") || "en";
+  let { CardData, AboutContent, HeaderContent, ThanksNote } =
+    LanguageData[lang];
 
-  const updateCard = () => {
-    const { title, desc } = data.get(keys[currentIndex]);
-    document.getElementById("title").innerHTML = title;
-    document.getElementById("desc").innerHTML = desc;
-  };
+  const updateLanguage = () => {
+    ({ CardData, AboutContent, HeaderContent, ThanksNote } =
+      LanguageData[lang]);
 
-  document.getElementById("prev").addEventListener("click", () => {
-    currentIndex = (currentIndex - 1 + keys.length) % keys.length;
-    updateCard();
-  });
+    // 🔹 Update Card Content
+    let currentIndex = 0;
+    const keys = Array.from(CardData.keys());
 
-  document.getElementById("next").addEventListener("click", () => {
-    currentIndex = (currentIndex + 1) % keys.length;
-    updateCard();
-  });
+    const updateCard = () => {
+      const { title, desc } = CardData.get(keys[currentIndex]);
+      document.getElementById("title").innerHTML = title;
+      document.getElementById("desc").innerHTML = desc;
+    };
 
-  updateCard(); // Initial card load
+    document.getElementById("prev").addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + keys.length) % keys.length;
+      updateCard();
+    });
 
-  // 🔅 Theme Toggle
-  const themeToggle = document.getElementById("toggle-theme");
-  const html = document.documentElement;
+    document.getElementById("next").addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % keys.length;
+      updateCard();
+    });
 
-  if (localStorage.getItem("know-your-potential-theme") === "dark") {
-    html.classList.add("dark");
-    themeToggle.textContent = "☀️ Light Mode";
-  }
+    updateCard(); // Initial card load
 
-  themeToggle.addEventListener("click", () => {
-    const isDark = html.classList.toggle("dark");
-    themeToggle.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
-    localStorage.setItem("know-your-potential-theme", isDark ? "dark" : "light");
-  });
+    // 🔅 Theme Toggle
+    const themeToggle = document.getElementById("toggle-theme");
+    const html = document.documentElement;
 
-  // 🔥 About Modal Handling
-  const aboutModal = document.getElementById("about-modal");
-  const aboutBtn = document.getElementById("about-btn");
-  const closeModal = document.getElementById("close-modal");
-
-  // const aboutContent = {
-  //   title: "About Know Your Positivity",
-  //   description: "This tool helps you unlock your inner power through motivational quotes! 🚀",
-  //   why: "Because sometimes, all we need is a little push to see the brighter side of life! 🌟",
-  // };
-
-  const aboutContent = {
-    title: "About Know Your Positivity",
-    description:
-      "This tool helps you unlock your inner power through motivational quotes! 🚀",
-    why: `Because sometimes, all we need is a little push to see the brighter side of life! 🌟<br><br>
-          <strong>Why Me?</strong> Because I believe in continuous self-improvement and 
-          spreading positivity! Every day is a new chance to grow and inspire others. 🚀🔥`,
-    version: "v1.0.2",
-  };
-  
-  aboutBtn.addEventListener("click", () => {
-    aboutModal.querySelector("h2").textContent = aboutContent.title;
-    aboutModal.querySelector("p").innerHTML = 
-      `<strong>What:</strong> ${aboutContent.description}<br><br>
-       <strong>Why:</strong> ${aboutContent.why}<br><br>
-       <span style="font-size: 0.7rem; color: gray;">Version: ${aboutContent.version}</span>`;
-  
-    aboutModal.classList.remove("opacity-0", "pointer-events-none");
-  });
-  
-
-  closeModal.addEventListener("click", () => {
-    aboutModal.classList.add("opacity-0", "pointer-events-none");
-  });
-
-  // 🔒 Security: Disable Right Click & Inspect Element
-  document.addEventListener("contextmenu", (event) => event.preventDefault());
-  document.addEventListener("keydown", (event) => {
-    if (event.ctrlKey && ["u", "U", "I", "J"].includes(event.key)) {
-      event.preventDefault();
+    if (localStorage.getItem("know-your-potential-theme") === "dark") {
+      html.classList.add("dark");
+      themeToggle.textContent = "☀️ Light Mode";
     }
+
+    themeToggle.addEventListener("click", () => {
+      const isDark = html.classList.toggle("dark");
+      themeToggle.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+      localStorage.setItem(
+        "know-your-potential-theme",
+        isDark ? "dark" : "light"
+      );
+    });
+
+    // 🔹 Update Header
+    document.getElementById("kyp-header").innerHTML = HeaderContent.title;
+
+    // 🔹 Update About Modal
+    document.getElementById("about-btn").addEventListener("click", () => {
+      const aboutModal = document.getElementById("about-modal");
+      aboutModal.querySelector("h2").textContent = AboutContent.title;
+      aboutModal.querySelector("p").innerHTML = `
+        <strong>What:</strong> ${AboutContent.description}<br><br>
+        <strong>Why:</strong> ${AboutContent.why}<br><br>
+        <span style="font-size: 0.7rem; color: gray;">Version: ${AboutContent.version}</span>
+      `;
+      aboutModal.classList.remove("opacity-0", "pointer-events-none");
+    });
+
+    document.getElementById("close-modal").innerHTML =
+      AboutContent.closeButtonTitle;
+
+    // 🔹 Update Thank You Note
+    document.getElementById("thanksNote").innerText = ThanksNote;
+
+    // 🔹 Update Language Switcher Button
+    document.getElementById("langSwitch").innerText =
+      lang === "en" ? "🇮🇳 हिंदी" : "🇬🇧 English";
+  };
+
+  // 🔄 Language Switcher Event
+  document.getElementById("langSwitch").addEventListener("click", () => {
+    lang = lang === "en" ? "hi" : "en";
+    localStorage.setItem("appLanguage", lang);
+    updateLanguage();
   });
+
+  updateLanguage();
 });

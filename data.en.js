@@ -1,4 +1,4 @@
-const data = new Map([
+export const CardData = new Map([
   [
     "1",
     {
@@ -11,7 +11,8 @@ const data = new Map([
     "2",
     {
       id: 2,
-      title: "1️⃣ Cognitive Loop (Thinking & Execution Framework): Effective 6 Step Process",
+      title:
+        "1️⃣ Cognitive Loop (Thinking & Execution Framework): Effective 6 Step Process",
       desc: `
         <ul class="list-none pl-5">
           <li>Stay Calm 🧘‍♂️</li>
@@ -29,7 +30,8 @@ const data = new Map([
     "3",
     {
       id: 3,
-      title: "2️⃣ Data Processing Model (How Brain & Systems Work): Module-Based Approach",
+      title:
+        "2️⃣ Data Processing Model (How Brain & Systems Work): Module-Based Approach",
       desc: `
         <ul class="list-none pl-5">
           <li>Collect 📥</li>
@@ -45,7 +47,8 @@ const data = new Map([
     "4",
     {
       id: 4,
-      title: "3️⃣ Motivation & Growth Model (Psychological & Behavioral Science): 4 Pushes Model",
+      title:
+        "3️⃣ Motivation & Growth Model (Psychological & Behavioral Science): 4 Pushes Model",
       desc: `
         <ol class="list-none pl-5">
           <li><strong>Discomfort →</strong> Force Push (Break inertia) 💥</li>
@@ -91,4 +94,23 @@ const data = new Map([
   ],
 ]);
 
-export default data;
+// export default CardData;
+
+export const AboutContent = {
+  title: "About Know Your Positivity",
+  description:
+    "This tool helps you unlock your inner power through motivational quotes! 🚀",
+  why: `Because sometimes, all we need is a little push to see the brighter side of life! 🌟<br><br>
+        <strong>Why Me?</strong> Because I believe in continuous self-improvement and 
+        spreading positivity! Every day is a new chance to grow and inspire others. 🚀🔥`,
+  version: "v1.0.2",
+  closeButtonTitle: "🔵 Got it!",
+};
+
+export const HeaderContent = {
+  title: "🚀 Know Your Positivity! Unlock Your Power! 🪄",
+};
+
+export const ThanksNote = "Thank you for being with us!";
+
+export const LangText = "🇮🇳";
