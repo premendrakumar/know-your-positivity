@@ -1,11 +1,11 @@
-import data, { aboutContent } from "../data.js";
+import CardData, { AboutContent, HeaderContent } from "../data.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   let currentIndex = 0;
-  const keys = Array.from(data.keys());
+  const keys = Array.from(CardData.keys());
 
   const updateCard = () => {
-    const { title, desc } = data.get(keys[currentIndex]);
+    const { title, desc } = CardData.get(keys[currentIndex]);
     document.getElementById("title").innerHTML = title;
     document.getElementById("desc").innerHTML = desc;
   };
@@ -52,12 +52,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // };
 
   aboutBtn.addEventListener("click", () => {
-    aboutModal.querySelector("h2").textContent = aboutContent.title;
+    aboutModal.querySelector("h2").textContent = AboutContent.title;
     aboutModal.querySelector(
       "p"
-    ).innerHTML = `<strong>What:</strong> ${aboutContent.description}<br><br>
-       <strong>Why:</strong> ${aboutContent.why}<br><br>
-       <span style="font-size: 0.7rem; color: gray;">Version: ${aboutContent.version}</span>`;
+    ).innerHTML = `<strong>What:</strong> ${AboutContent.description}<br><br>
+       <strong>Why:</strong> ${AboutContent.why}<br><br>
+       <span style="font-size: 0.7rem; color: gray;">Version: ${AboutContent.version}</span>`;
 
     aboutModal.classList.remove("opacity-0", "pointer-events-none");
   });
@@ -73,4 +73,6 @@ document.addEventListener("DOMContentLoaded", () => {
       event.preventDefault();
     }
   });
+
+  document.getElementById("kyp-header").innerHTML=HeaderContent.title
 });

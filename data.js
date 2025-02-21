@@ -1,4 +1,4 @@
-const data = new Map([
+const CardData = new Map([
   [
     "1",
     {
@@ -91,10 +91,10 @@ const data = new Map([
   ],
 ]);
 
-export default data;
+export default CardData;
 
 
-export const aboutContent = {
+export const AboutContent = {
   title: "About Know Your Positivity",
   description:
     "This tool helps you unlock your inner power through motivational quotes! 🚀",
@@ -103,3 +103,7 @@ export const aboutContent = {
         spreading positivity! Every day is a new chance to grow and inspire others. 🚀🔥`,
   version: "v1.0.2",
 };
+
+export const HeaderContent={
+  title:"🚀 Know Your Positivity! Unlock Your Power! 🪄"
+}
