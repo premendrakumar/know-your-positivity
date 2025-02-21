@@ -66,6 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
     aboutModal.classList.add("opacity-0", "pointer-events-none");
   });
 
+  closeModal.innerHTML = AboutContent.closeButtonTitle;
+
   // 🔒 Security: Disable Right Click & Inspect Element
   document.addEventListener("contextmenu", (event) => event.preventDefault());
   document.addEventListener("keydown", (event) => {
@@ -74,5 +76,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  document.getElementById("kyp-header").innerHTML=HeaderContent.title
+  document.getElementById("kyp-header").innerHTML = HeaderContent.title;
 });
