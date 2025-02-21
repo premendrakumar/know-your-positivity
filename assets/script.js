@@ -42,10 +42,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const aboutBtn = document.getElementById("about-btn");
   const closeModal = document.getElementById("close-modal");
 
+  // const aboutContent = {
+  //   title: "About Know Your Positivity",
+  //   description: "This tool helps you unlock your inner power through motivational quotes! 🚀",
+  //   why: "Because sometimes, all we need is a little push to see the brighter side of life! 🌟",
+  // };
+
   const aboutContent = {
     title: "About Know Your Positivity",
     description: "This tool helps you unlock your inner power through motivational quotes! 🚀",
-    why: "Because sometimes, all we need is a little push to see the brighter side of life! 🌟",
+    why: `Because sometimes, all we need is a little push to see the brighter side of life! 🌟<br><br>
+          <strong>Why Me?</strong> Because I believe in continuous self-improvement and 
+          spreading positivity! Every day is a new chance to grow and inspire others. 🚀🔥`,
   };
 
   aboutBtn.addEventListener("click", () => {
