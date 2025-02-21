@@ -103,7 +103,7 @@ export const AboutContent = {
   why: `Because sometimes, all we need is a little push to see the brighter side of life! 🌟<br><br>
         <strong>Why Me?</strong> Because I believe in continuous self-improvement and 
         spreading positivity! Every day is a new chance to grow and inspire others. 🚀🔥`,
-  version: "v1.0.2",
+  version: "v1.0.4",
   closeButtonTitle: "🔵 Got it!",
 };
 

@@ -11,9 +11,9 @@ All notable changes to this project will be documented in this file.
 - 🎯More engaging UI/UX enhancements.
 - 🎯New set of motivational quotes.
 
-## [1.0.4] - 2025-02-21, In-progress
+## [1.0.4] - 2025-02-21
 - 🎯Hindi language support.
-  - 🎯Working to implement Dropdown ki jagah 'En hin' jaisa UI bhi bana sakte ho!
+  - 🎯implemented 'En hin'
 - 🎯data.json ko data.en.json and data.hin.json jaisa kuch (so that we can create more i18n supported files in future)
 - 🎯can we use react to seggregate and create re-usable components.. (constraint is "sasta suraksheet tikaau")
 
