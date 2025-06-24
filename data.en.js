@@ -92,6 +92,23 @@ export const CardData = new Map([
       `,
     },
   ],
+  [
+    "7",
+    {
+      id: 7,
+      title: '🔁 "SHANTI" Recursive Comeback Model',
+      desc: `
+      <ul class="list-none pl-5">
+          <li>Stay Calm</li>
+          <li>Hear Your Mind</li>
+          <li>Act Small</li>
+          <li>Note Down</li>
+          <li>Thank Yourself</li>
+          <li>Iterate Tomorrow</li>
+      </ul>
+      `,
+    },
+  ],
 ]);
 
 // export default CardData;
