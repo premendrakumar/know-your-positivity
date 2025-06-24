@@ -92,6 +92,23 @@ export const CardData = new Map([
         `,
     },
   ],
+  [
+    "7",
+    {
+      id: 7,
+      title: '🔁 "SHANTI" Recursive Comeback Model',
+      desc: `
+      <ul class="list-none pl-5">
+          <li>मन को शांत करना, थकावट या डर से निकलना </li>
+          <li>अपने मन की सुनना – आज कैसा महसूस हो रहा है </li>
+          <li>एक छोटा actionable step – Resume / Code / Profile </li>
+          <li>जो किया, वो 1 line में लिखना (reflection)</li>
+          <li>खुद को धन्यवाद देना — “मैंने प्रयास किया” </li>
+          <li>अगले दिन दोबारा यही क्रम दोहराना</li>
+      </ul>
+      `,
+    },
+  ],
 ]);
 
 // export default CardData;
