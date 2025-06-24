@@ -99,12 +99,12 @@ export const CardData = new Map([
       title: '🔁 "SHANTI" Recursive Comeback Model',
       desc: `
       <ul class="list-none pl-5">
-          <li>Stay Calm</li>
+          <li>Stay Calm 🧘‍♂️</li>
           <li>Hear Your Mind</li>
           <li>Act Small</li>
           <li>Note Down</li>
           <li>Thank Yourself</li>
-          <li>Iterate Tomorrow</li>
+          <li>Iterate Tomorrow 🔁</li>
       </ul>
       `,
     },
