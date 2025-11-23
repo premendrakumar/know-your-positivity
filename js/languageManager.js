@@ -38,16 +38,17 @@ export class LanguageManager {
 
   /**
    * Update language switcher button text
+   * Standardized format: Flag + Language name in English
    */
   updateLanguageButton() {
     const languageLabels = {
-      en: "🇮🇳 हिंदी",
-      hi: "🇵🇰 اردو",
-      ur: "🇮🇳 ਪੰਜਾਬੀ",
-      pn: "🇮🇳 मराठी",
-      mr: "🇷🇺 Русский",
-      ru: "🇮🇳 ગુજરાતી",
-      gu: "🇬🇧 English",
+      en: "🇬🇧 English",
+      hi: "🇮🇳 Hindi",
+      ur: "🇵🇰 Urdu",
+      pn: "🇮🇳 Punjabi",
+      mr: "🇮🇳 Marathi",
+      ru: "🇷🇺 Russian",
+      gu: "🇮🇳 Gujarati",
     };
     this.langSwitchButton.innerText = languageLabels[this.currentLang] || "🇬🇧 English";
   }
