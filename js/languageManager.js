@@ -27,7 +27,7 @@ export class LanguageManager {
    * Switch to the next available language
    */
   switchLanguage() {
-    const languages = ["en", "hi", "ur", "pn", "mr", "ru", "gu"];
+    const languages = ["en", "hi", "ur", "pn", "mr", "ru", "gu", "hr"];
     const currentIndex = languages.indexOf(this.currentLang);
     const nextIndex = (currentIndex + 1) % languages.length;
     this.currentLang = languages[nextIndex];
@@ -49,6 +49,7 @@ export class LanguageManager {
       mr: "🇮🇳 Marathi",
       ru: "🇷🇺 Russian",
       gu: "🇮🇳 Gujarati",
+      hr: "🇮🇳 Haryanvi",
     };
     this.langSwitchButton.innerText = languageLabels[this.currentLang] || "🇬🇧 English";
   }

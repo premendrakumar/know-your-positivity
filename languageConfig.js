@@ -5,6 +5,7 @@ import * as pn from "./data.pn.js";
 import * as mr from "./data.mr.js";
 import * as ru from "./data.ru.js";
 import * as gu from "./data.gu.js";
+import * as hr from "./data.hr.js";
 
 const LanguageData = {
   en,
@@ -14,6 +15,7 @@ const LanguageData = {
   mr,
   ru,
   gu,
+  hr,
 };
 
 export default LanguageData;
