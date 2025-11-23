@@ -6,7 +6,7 @@ A beautiful, interactive web application that helps you unlock your inner power 
 
 - **📱 Card-Based Navigation**: Browse through motivational content with intuitive prev/next controls
 - **🌓 Dark Mode**: Toggle between light and dark themes (preference saved in localStorage)
-- **🌍 Multi-Language Support**: Available in English and Hindi (हिंदी)
+- **🌍 Multi-Language Support**: Available in 12 languages including English, Hindi, Urdu, Punjabi, Marathi, Russian, Gujarati, Haryanvi, Bangla, Kannada, Telugu, and Tamil
 - **💡 Motivational Frameworks**: Learn about various models including:
   - Cognitive Loop (Thinking & Execution Framework)
   - Data Processing Model
@@ -51,7 +51,7 @@ A beautiful, interactive web application that helps you unlock your inner power 
 ## 📖 Usage
 
 - **Navigate Cards**: Use the ⬅️ and ➡️ buttons to browse through different motivational frameworks
-- **Switch Language**: Click the language button (🇮🇳 हिंदी / 🇬🇧 English) in the footer to toggle between languages
+- **Switch Language**: Click the language button in the footer to cycle through all available languages (12 languages supported)
 - **Toggle Theme**: Click the 🌙 Dark Mode / ☀️ Light Mode button to switch themes
 - **About**: Click the ℹ️ About button to learn more about the project
 
@@ -77,7 +77,17 @@ know-your-positivity/
 │   ├── uiManager.js      # UI updates
 │   └── README.md         # Module documentation
 ├── data.en.js            # English content data
-├── data.hi.js            # Hindi content data
+├── data.hi.js            # Hindi (हिंदी) content data
+├── data.ur.js            # Urdu (اردو) content data
+├── data.pn.js            # Punjabi (ਪੰਜਾਬੀ) content data
+├── data.mr.js            # Marathi (मराठी) content data
+├── data.ru.js            # Russian (Русский) content data
+├── data.gu.js            # Gujarati (ગુજરાતી) content data
+├── data.hr.js            # Haryanvi (हरियाणवी) content data
+├── data.bn.js            # Bangla (বাংলা) content data
+├── data.kn.js            # Kannada (ಕನ್ನಡ) content data
+├── data.te.js            # Telugu (తెలుగు) content data
+├── data.ta.js            # Tamil (தமிழ்) content data
 ├── languageConfig.js     # Language configuration
 ├── index.html            # Main HTML file
 ├── changelog.md          # Project changelog
@@ -99,7 +109,11 @@ This structure makes the code more maintainable, testable, and easier to extend.
 
 ## 🎯 Current Version
 
-**v1.0.4** - Latest release with Hindi language support
+**v1.0.4** - Latest release with multi-language support (12 languages)
+
+### Supported Languages
+
+🇬🇧 English | 🇮🇳 Hindi | 🇵🇰 Urdu | 🇮🇳 Punjabi | 🇮🇳 Marathi | 🇷🇺 Russian | 🇮🇳 Gujarati | 🇮🇳 Haryanvi | 🇧🇩 Bangla | 🇮🇳 Kannada | 🇮🇳 Telugu | 🇮🇳 Tamil
 
 See [changelog.md](changelog.md) for detailed version history and upcoming features.
 
