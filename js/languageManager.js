@@ -27,7 +27,7 @@ export class LanguageManager {
    * Switch to the next available language
    */
   switchLanguage() {
-    const languages = ["en", "hi", "ur", "pn"];
+    const languages = ["en", "hi", "ur", "pn", "mr", "ru", "gu"];
     const currentIndex = languages.indexOf(this.currentLang);
     const nextIndex = (currentIndex + 1) % languages.length;
     this.currentLang = languages[nextIndex];
@@ -44,7 +44,10 @@ export class LanguageManager {
       en: "🇮🇳 हिंदी",
       hi: "🇵🇰 اردو",
       ur: "🇮🇳 ਪੰਜਾਬੀ",
-      pn: "🇬🇧 English",
+      pn: "🇮🇳 मराठी",
+      mr: "🇷🇺 Русский",
+      ru: "🇮🇳 ગુજરાતી",
+      gu: "🇬🇧 English",
     };
     this.langSwitchButton.innerText = languageLabels[this.currentLang] || "🇬🇧 English";
   }
