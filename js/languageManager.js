@@ -27,7 +27,10 @@ export class LanguageManager {
    * Switch to the next available language
    */
   switchLanguage() {
-    this.currentLang = this.currentLang === "en" ? "hi" : "en";
+    const languages = ["en", "hi", "ur", "pn"];
+    const currentIndex = languages.indexOf(this.currentLang);
+    const nextIndex = (currentIndex + 1) % languages.length;
+    this.currentLang = languages[nextIndex];
     localStorage.setItem(this.languageKey, this.currentLang);
     this.updateLanguageButton();
     return this.getCurrentLanguageData();
@@ -37,8 +40,13 @@ export class LanguageManager {
    * Update language switcher button text
    */
   updateLanguageButton() {
-    this.langSwitchButton.innerText =
-      this.currentLang === "en" ? "🇮🇳 हिंदी" : "🇬🇧 English";
+    const languageLabels = {
+      en: "🇮🇳 हिंदी",
+      hi: "🇵🇰 اردو",
+      ur: "🇮🇳 ਪੰਜਾਬੀ",
+      pn: "🇬🇧 English",
+    };
+    this.langSwitchButton.innerText = languageLabels[this.currentLang] || "🇬🇧 English";
   }
 
   /**
