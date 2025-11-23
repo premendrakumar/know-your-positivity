@@ -14,8 +14,30 @@ export class ModalManager {
    * Initialize modal event listeners
    */
   initialize() {
-    this.aboutButton.addEventListener("click", () => this.open());
-    this.closeButton.addEventListener("click", () => this.close());
+    // Remove any existing listeners by cloning and replacing
+    if (this.aboutButton) {
+      const newAboutButton = this.aboutButton.cloneNode(true);
+      this.aboutButton.parentNode.replaceChild(newAboutButton, this.aboutButton);
+      this.aboutButton = newAboutButton;
+    }
+    
+    if (this.closeButton) {
+      const newCloseButton = this.closeButton.cloneNode(true);
+      this.closeButton.parentNode.replaceChild(newCloseButton, this.closeButton);
+      this.closeButton = newCloseButton;
+    }
+    
+    // Attach event listeners
+    this.aboutButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      this.open();
+    });
+    
+    this.closeButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      this.close();
+    });
     
     // Close modal when clicking outside
     this.modal.addEventListener("click", (e) => {
@@ -35,7 +57,7 @@ export class ModalManager {
       <strong>Why:</strong> ${aboutContent.why}<br><br>
       <span style="font-size: 0.7rem; color: gray;">Version: ${aboutContent.version}</span>
     `;
-    this.closeButton.innerHTML = aboutContent.closeButtonTitle;
+    this.closeButton.textContent = aboutContent.closeButtonTitle;
   }
 
   /**
