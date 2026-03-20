@@ -41,7 +41,31 @@ export class CardManager {
   initialize() {
     document.getElementById("prev").addEventListener("click", () => this.previous());
     document.getElementById("next").addEventListener("click", () => this.next());
+    this.attachKeyboardNavigation();
     this.updateCard(); // Initial card load
+  }
+
+  /**
+   * Keyboard navigation:
+   * - ArrowLeft  -> previous card
+   * - ArrowRight -> next card
+   */
+  attachKeyboardNavigation() {
+    document.addEventListener("keydown", (e) => {
+      // Prevent keyboard navigation while About modal is open.
+      const aboutModal = document.getElementById("about-modal");
+      if (aboutModal && !aboutModal.classList.contains("pointer-events-none")) {
+        return;
+      }
+
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        this.previous();
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        this.next();
+      }
+    });
   }
 
   /**
