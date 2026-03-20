@@ -8,6 +8,7 @@ export class CardManager {
     this.keys = Array.from(cardData.keys());
     this.titleElement = document.getElementById("title");
     this.descElement = document.getElementById("desc");
+    this.cardContainer = document.getElementById("card-container");
   }
 
   /**
@@ -42,7 +43,16 @@ export class CardManager {
     document.getElementById("prev").addEventListener("click", () => this.previous());
     document.getElementById("next").addEventListener("click", () => this.next());
     this.attachKeyboardNavigation();
+    this.attachSwipeNavigation();
     this.updateCard(); // Initial card load
+  }
+
+  /**
+   * Returns true when the About modal is currently open.
+   */
+  isAboutModalOpen() {
+    const aboutModal = document.getElementById("about-modal");
+    return aboutModal && !aboutModal.classList.contains("pointer-events-none");
   }
 
   /**
@@ -53,8 +63,7 @@ export class CardManager {
   attachKeyboardNavigation() {
     document.addEventListener("keydown", (e) => {
       // Prevent keyboard navigation while About modal is open.
-      const aboutModal = document.getElementById("about-modal");
-      if (aboutModal && !aboutModal.classList.contains("pointer-events-none")) {
+      if (this.isAboutModalOpen()) {
         return;
       }
 
@@ -66,6 +75,64 @@ export class CardManager {
         this.next();
       }
     });
+  }
+
+  /**
+   * Mobile swipe navigation:
+   * - Swipe left  -> next card
+   * - Swipe right -> previous card
+   *
+   * Uses a simple heuristic to avoid interfering with vertical scrolling.
+   */
+  attachSwipeNavigation() {
+    if (!this.cardContainer) return;
+
+    const minSwipeDistanceX = 50; // pixels
+    const maxSwipeDistanceYRatio = 0.5; // allow only mostly-horizontal swipes
+
+    let startX = 0;
+    let startY = 0;
+    let tracking = false;
+
+    this.cardContainer.addEventListener(
+      "touchstart",
+      (e) => {
+        if (this.isAboutModalOpen()) return;
+        if (!e.touches || e.touches.length === 0) return;
+        const t = e.touches[0];
+        startX = t.clientX;
+        startY = t.clientY;
+        tracking = true;
+      },
+      { passive: true }
+    );
+
+    this.cardContainer.addEventListener(
+      "touchend",
+      (e) => {
+        if (!tracking) return;
+        tracking = false;
+        if (!e.changedTouches || e.changedTouches.length === 0) return;
+        if (this.isAboutModalOpen()) return;
+
+        const t = e.changedTouches[0];
+        const dx = t.clientX - startX;
+        const dy = t.clientY - startY;
+
+        // Ignore small movements
+        if (Math.abs(dx) < minSwipeDistanceX) return;
+
+        // Ignore mostly vertical gestures (let browser handle scroll)
+        if (Math.abs(dy) > Math.abs(dx) * maxSwipeDistanceYRatio) return;
+
+        if (dx < 0) {
+          this.next();
+        } else {
+          this.previous();
+        }
+      },
+      { passive: true }
+    );
   }
 
   /**
