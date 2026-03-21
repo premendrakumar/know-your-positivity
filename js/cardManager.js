@@ -9,6 +9,8 @@ export class CardManager {
     this.titleElement = document.getElementById("title");
     this.descElement = document.getElementById("desc");
     this.cardContainer = document.getElementById("card-container");
+    /** Prevent duplicate document/touch listeners if initialize were called again */
+    this._navigationBound = false;
   }
 
   /**
@@ -42,8 +44,11 @@ export class CardManager {
   initialize() {
     document.getElementById("prev").addEventListener("click", () => this.previous());
     document.getElementById("next").addEventListener("click", () => this.next());
-    this.attachKeyboardNavigation();
-    this.attachSwipeNavigation();
+    if (!this._navigationBound) {
+      this.attachKeyboardNavigation();
+      this.attachSwipeNavigation();
+      this._navigationBound = true;
+    }
     this.updateCard(); // Initial card load
   }
 

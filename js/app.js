@@ -1,7 +1,7 @@
 /**
  * Main Application - Coordinates all modules
  */
-import LanguageData from "../languageConfig.js";
+import LanguageData from "./i18n/registry.js";
 import { CardManager } from "./cardManager.js";
 import { ThemeManager } from "./themeManager.js";
 import { LanguageManager } from "./languageManager.js";
@@ -40,7 +40,7 @@ class App {
    * Update all components with language data
    */
   updateAllComponents(languageData) {
-    const { CardData, AboutContent, HeaderContent, ThanksNote } = languageData;
+    const { CardData, AboutContent } = languageData;
 
     // Initialize or update card manager
     if (!this.cardManager) {

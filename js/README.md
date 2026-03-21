@@ -7,6 +7,15 @@ This directory contains the modular JavaScript code for the Know Your Positivity
 ### `app.js`
 Main application entry point that coordinates all modules and initializes the application.
 
+### `config/languages.js`
+Defines `LANGUAGE_ORDER` (cycle order), `LANGUAGE_LABELS` (footer button text), and `DEFAULT_LANGUAGE`.
+
+### `config/storageKeys.js`
+Shared `localStorage` key names for theme and language.
+
+### `i18n/registry.js`
+Imports every `locales/data.*.js` module and exports the `LanguageData` map used by `LanguageManager`.
+
 ### `cardManager.js`
 Handles card navigation and display logic:
 - Card data management

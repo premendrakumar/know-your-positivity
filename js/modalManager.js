@@ -8,38 +8,27 @@ export class ModalManager {
     this.closeButton = document.getElementById("close-modal");
     this.modalTitle = this.modal.querySelector("h2");
     this.modalContent = this.modal.querySelector("p");
+    this._listenersAttached = false;
   }
 
   /**
-   * Initialize modal event listeners
+   * Initialize modal event listeners (once)
    */
   initialize() {
-    // Remove any existing listeners by cloning and replacing
-    if (this.aboutButton) {
-      const newAboutButton = this.aboutButton.cloneNode(true);
-      this.aboutButton.parentNode.replaceChild(newAboutButton, this.aboutButton);
-      this.aboutButton = newAboutButton;
-    }
-    
-    if (this.closeButton) {
-      const newCloseButton = this.closeButton.cloneNode(true);
-      this.closeButton.parentNode.replaceChild(newCloseButton, this.closeButton);
-      this.closeButton = newCloseButton;
-    }
-    
-    // Attach event listeners
+    if (this._listenersAttached) return;
+    this._listenersAttached = true;
+
     this.aboutButton.addEventListener("click", (e) => {
       e.preventDefault();
       this.open();
     });
-    
+
     this.closeButton.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
       this.close();
     });
-    
-    // Close modal when clicking outside
+
     this.modal.addEventListener("click", (e) => {
       if (e.target === this.modal) {
         this.close();
@@ -74,4 +63,3 @@ export class ModalManager {
     this.modal.classList.add("opacity-0", "pointer-events-none");
   }
 }
-

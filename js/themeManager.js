@@ -1,9 +1,11 @@
 /**
  * ThemeManager - Handles dark/light mode toggle
  */
+import { STORAGE_KEYS } from "./config/storageKeys.js";
+
 export class ThemeManager {
   constructor() {
-    this.themeKey = "know-your-potential-theme";
+    this.themeKey = STORAGE_KEYS.theme;
     this.themeToggle = document.getElementById("toggle-theme");
     this.html = document.documentElement;
   }

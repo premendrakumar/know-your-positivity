@@ -68,31 +68,27 @@ A beautiful, interactive web application that helps you unlock your inner power 
 know-your-positivity/
 ├── assets/
 │   └── a-studious-student.png  # Favicon
-├── js/                    # JavaScript modules (modular architecture)
-│   ├── app.js            # Main application coordinator
-│   ├── cardManager.js    # Card navigation logic
-│   ├── themeManager.js   # Dark/light mode management
-│   ├── languageManager.js # Language switching
-│   ├── modalManager.js   # About modal handling
-│   ├── uiManager.js      # UI updates
-│   └── README.md         # Module documentation
-├── data.en.js            # English content data
-├── data.hi.js            # Hindi (हिंदी) content data
-├── data.ur.js            # Urdu (اردو) content data
-├── data.pn.js            # Punjabi (ਪੰਜਾਬੀ) content data
-├── data.mr.js            # Marathi (मराठी) content data
-├── data.ru.js            # Russian (Русский) content data
-├── data.gu.js            # Gujarati (ગુજરાતી) content data
-├── data.hr.js            # Haryanvi (हरियाणवी) content data
-├── data.bn.js            # Bangla (বাংলা) content data
-├── data.kn.js            # Kannada (ಕನ್ನಡ) content data
-├── data.te.js            # Telugu (తెలుగు) content data
-├── data.ta.js            # Tamil (தமிழ்) content data
-├── languageConfig.js     # Language configuration
-├── index.html            # Main HTML file
-├── changelog.md          # Project changelog
-├── LICENSE               # MIT License
-└── README.md             # This file
+├── locales/               # Translation bundles (data.*.js)
+│   ├── data.en.js
+│   ├── data.hi.js
+│   └── ...                 # ur, pn, mr, ru, gu, hr, bn, kn, te, ta
+├── js/
+│   ├── app.js              # Main application coordinator
+│   ├── config/
+│   │   ├── languages.js    # Language order + switcher labels
+│   │   └── storageKeys.js  # localStorage key names
+│   ├── i18n/
+│   │   └── registry.js     # Imports all locale modules
+│   ├── cardManager.js
+│   ├── themeManager.js
+│   ├── languageManager.js
+│   ├── modalManager.js
+│   ├── uiManager.js
+│   └── README.md
+├── index.html
+├── changelog.md
+├── LICENSE
+└── README.md
 ```
 
 ### Code Organization
@@ -104,6 +100,8 @@ The codebase follows a **modular architecture** with separate manager classes fo
 - **ModalManager**: Manages modal interactions
 - **UIManager**: Updates UI elements based on language
 - **App**: Coordinates all modules and initializes the application
+- **`js/config/`**: Single source of truth for language order/labels and storage keys
+- **`locales/`**: All `data.*.js` translation files (add a file + register in `js/i18n/registry.js` and `js/config/languages.js`)
 
 This structure makes the code more maintainable, testable, and easier to extend.
 

@@ -1,12 +1,31 @@
 /**
  * LanguageManager - Handles language switching and localization
  */
+import {
+  LANGUAGE_ORDER,
+  LANGUAGE_LABELS,
+  DEFAULT_LANGUAGE,
+} from "./config/languages.js";
+import { STORAGE_KEYS } from "./config/storageKeys.js";
+
 export class LanguageManager {
   constructor(languageData) {
     this.languageData = languageData;
-    this.languageKey = "appLanguage";
-    this.currentLang = localStorage.getItem(this.languageKey) || "en";
+    this.languageKey = STORAGE_KEYS.language;
+    const stored = localStorage.getItem(this.languageKey);
+    this.currentLang = this.normalizeLanguageCode(stored);
+    if (stored !== this.currentLang) {
+      localStorage.setItem(this.languageKey, this.currentLang);
+    }
     this.langSwitchButton = document.getElementById("langSwitch");
+  }
+
+  /**
+   * Ensure stored code is still supported (e.g. after removing a locale).
+   */
+  normalizeLanguageCode(code) {
+    if (code && LANGUAGE_ORDER.includes(code)) return code;
+    return DEFAULT_LANGUAGE;
   }
 
   /**
@@ -27,10 +46,10 @@ export class LanguageManager {
    * Switch to the next available language
    */
   switchLanguage() {
-    const languages = ["en", "hi", "ur", "pn", "mr", "ru", "gu", "hr", "bn", "kn", "te", "ta"];
-    const currentIndex = languages.indexOf(this.currentLang);
-    const nextIndex = (currentIndex + 1) % languages.length;
-    this.currentLang = languages[nextIndex];
+    const currentIndex = LANGUAGE_ORDER.indexOf(this.currentLang);
+    const safeIndex = currentIndex === -1 ? 0 : currentIndex;
+    const nextIndex = (safeIndex + 1) % LANGUAGE_ORDER.length;
+    this.currentLang = LANGUAGE_ORDER[nextIndex];
     localStorage.setItem(this.languageKey, this.currentLang);
     this.updateLanguageButton();
     return this.getCurrentLanguageData();
@@ -41,21 +60,8 @@ export class LanguageManager {
    * Standardized format: Flag + Language name in English
    */
   updateLanguageButton() {
-    const languageLabels = {
-      en: "🇬🇧 English",
-      hi: "🇮🇳 Hindi",
-      ur: "🇵🇰 Urdu",
-      pn: "🇮🇳 Punjabi",
-      mr: "🇮🇳 Marathi",
-      ru: "🇷🇺 Russian",
-      gu: "🇮🇳 Gujarati",
-      hr: "🇮🇳 Haryanvi",
-      bn: "🇧🇩 Bangla",
-      kn: "🇮🇳 Kannada",
-      te: "🇮🇳 Telugu",
-      ta: "🇮🇳 Tamil",
-    };
-    this.langSwitchButton.innerText = languageLabels[this.currentLang] || "🇬🇧 English";
+    this.langSwitchButton.innerText =
+      LANGUAGE_LABELS[this.currentLang] || LANGUAGE_LABELS[DEFAULT_LANGUAGE];
   }
 
   /**
@@ -65,4 +71,3 @@ export class LanguageManager {
     this.updateLanguageButton();
   }
 }
-
