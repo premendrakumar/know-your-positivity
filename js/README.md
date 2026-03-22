@@ -16,6 +16,9 @@ Shared `localStorage` key names for theme and language.
 ### `i18n/registry.js`
 Imports every `locales/data.*.js` module and exports the `LanguageData` map used by `LanguageManager`.
 
+### `state/appState.js`
+Versioned JSON state in `localStorage` (key `kyp-app-state`). Persists **card index per language** so reloads and returns visits restore the last slide. Theme and language continue to use their existing keys.
+
 ### `cardManager.js`
 Handles card navigation and display logic:
 - Card data management

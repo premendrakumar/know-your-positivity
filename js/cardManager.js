@@ -1,11 +1,21 @@
 /**
  * CardManager - Handles card navigation and display
  */
+import {
+  resolveCardIndex,
+  setCardIndexForLanguage,
+} from "./state/appState.js";
+
 export class CardManager {
-  constructor(cardData) {
+  /**
+   * @param {Map<string, object>} cardData
+   * @param {string} languageCode — current UI language (for per-language card position)
+   */
+  constructor(cardData, languageCode) {
+    this._lang = languageCode;
     this.cardData = cardData;
-    this.currentIndex = 0;
     this.keys = Array.from(cardData.keys());
+    this.currentIndex = resolveCardIndex(this._lang, this.keys.length);
     this.titleElement = document.getElementById("title");
     this.descElement = document.getElementById("desc");
     this.cardContainer = document.getElementById("card-container");
@@ -22,12 +32,23 @@ export class CardManager {
     this.descElement.innerHTML = desc;
   }
 
+  /** Persist current slide for the active language */
+  _persistCardIndex() {
+    setCardIndexForLanguage(
+      this._lang,
+      this.currentIndex,
+      this.keys.length - 1
+    );
+  }
+
   /**
    * Navigate to the previous card
    */
   previous() {
-    this.currentIndex = (this.currentIndex - 1 + this.keys.length) % this.keys.length;
+    this.currentIndex =
+      (this.currentIndex - 1 + this.keys.length) % this.keys.length;
     this.updateCard();
+    this._persistCardIndex();
   }
 
   /**
@@ -36,20 +57,26 @@ export class CardManager {
   next() {
     this.currentIndex = (this.currentIndex + 1) % this.keys.length;
     this.updateCard();
+    this._persistCardIndex();
   }
 
   /**
    * Initialize card navigation with event listeners
    */
   initialize() {
-    document.getElementById("prev").addEventListener("click", () => this.previous());
-    document.getElementById("next").addEventListener("click", () => this.next());
+    document
+      .getElementById("prev")
+      .addEventListener("click", () => this.previous());
+    document
+      .getElementById("next")
+      .addEventListener("click", () => this.next());
     if (!this._navigationBound) {
       this.attachKeyboardNavigation();
       this.attachSwipeNavigation();
       this._navigationBound = true;
     }
-    this.updateCard(); // Initial card load
+    this.updateCard();
+    this._persistCardIndex();
   }
 
   /**
@@ -57,7 +84,9 @@ export class CardManager {
    */
   isAboutModalOpen() {
     const aboutModal = document.getElementById("about-modal");
-    return aboutModal && !aboutModal.classList.contains("pointer-events-none");
+    return (
+      aboutModal && !aboutModal.classList.contains("pointer-events-none")
+    );
   }
 
   /**
@@ -67,7 +96,6 @@ export class CardManager {
    */
   attachKeyboardNavigation() {
     document.addEventListener("keydown", (e) => {
-      // Prevent keyboard navigation while About modal is open.
       if (this.isAboutModalOpen()) {
         return;
       }
@@ -86,14 +114,12 @@ export class CardManager {
    * Mobile swipe navigation:
    * - Swipe left  -> next card
    * - Swipe right -> previous card
-   *
-   * Uses a simple heuristic to avoid interfering with vertical scrolling.
    */
   attachSwipeNavigation() {
     if (!this.cardContainer) return;
 
-    const minSwipeDistanceX = 50; // pixels
-    const maxSwipeDistanceYRatio = 0.5; // allow only mostly-horizontal swipes
+    const minSwipeDistanceX = 50;
+    const maxSwipeDistanceYRatio = 0.5;
 
     let startX = 0;
     let startY = 0;
@@ -124,10 +150,8 @@ export class CardManager {
         const dx = t.clientX - startX;
         const dy = t.clientY - startY;
 
-        // Ignore small movements
         if (Math.abs(dx) < minSwipeDistanceX) return;
 
-        // Ignore mostly vertical gestures (let browser handle scroll)
         if (Math.abs(dy) > Math.abs(dx) * maxSwipeDistanceYRatio) return;
 
         if (dx < 0) {
@@ -142,12 +166,15 @@ export class CardManager {
 
   /**
    * Update card data when language changes
+   * @param {Map<string, object>} cardData
+   * @param {string} languageCode
    */
-  updateCardData(cardData) {
+  updateCardData(cardData, languageCode) {
+    this._lang = languageCode;
     this.cardData = cardData;
     this.keys = Array.from(cardData.keys());
-    this.currentIndex = 0; // Reset to first card on language change
+    this.currentIndex = resolveCardIndex(this._lang, this.keys.length);
     this.updateCard();
+    this._persistCardIndex();
   }
 }
-

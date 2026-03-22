@@ -79,6 +79,8 @@ know-your-positivity/
 │   │   └── storageKeys.js  # localStorage key names
 │   ├── i18n/
 │   │   └── registry.js     # Imports all locale modules
+│   ├── state/
+│   │   └── appState.js     # Versioned JSON state (card index per language)
 │   ├── cardManager.js
 │   ├── themeManager.js
 │   ├── languageManager.js

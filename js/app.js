@@ -43,11 +43,12 @@ class App {
     const { CardData, AboutContent } = languageData;
 
     // Initialize or update card manager
+    const lang = this.languageManager.getCurrentLanguage();
     if (!this.cardManager) {
-      this.cardManager = new CardManager(CardData);
+      this.cardManager = new CardManager(CardData, lang);
       this.cardManager.initialize();
     } else {
-      this.cardManager.updateCardData(CardData);
+      this.cardManager.updateCardData(CardData, lang);
     }
 
     // Initialize or update modal
